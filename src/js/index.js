@@ -1,6 +1,6 @@
 import "jquery";
-import "./main.css";
-import { getAllRoomInfo } from "./api/index";
+import "../css/main.css";
+import { getAllRoomInfo } from "../api/index";
 
 async function getRoomData() {
   const roomData = await getAllRoomInfo();

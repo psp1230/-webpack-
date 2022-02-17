@@ -1,46 +1,50 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "production",
-  entry: ["./src/main"],
+  entry: {
+    index: "./src/js/index",
+    roomInfo: "./src/js/roomInfo",
+  },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name]-[contenthash:8].bundle.js",
+    filename: "js/[name]-[contenthash:8].bundle.js",
   },
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery", //這邊以上是新增
     }),
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[hash].css",
+    }),
     new HtmlWebpackPlugin({
       title: "測試",
       inject: true,
       template: "./src/index.html",
       filename: "index.html",
-      // chunks: [],
+      chunks: ["index"],
     }),
     new HtmlWebpackPlugin({
       title: "測試分頁",
       inject: true,
       template: "./src/views/roomInfo.html",
       filename: "views/roomInfo.html",
-      // chunks: [],
+      chunks: ["roomInfo"],
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
-          { loader: "style-loader" },
+          { loader: MiniCssExtractPlugin.loader },
           // [css-loader](/loaders/css-loader)
           {
             loader: "css-loader",
-            options: {
-              modules: false,
-            },
           },
         ],
       },
@@ -54,6 +58,17 @@ module.exports = {
             plugins: ["@babel/plugin-transform-runtime"],
           },
         },
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
