@@ -24,14 +24,14 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: "測試",
-      inject: true,
+      inject: "body",
       template: "./src/index.html",
       filename: "index.html",
       chunks: ["index"],
     }),
     new HtmlWebpackPlugin({
       title: "測試分頁",
-      inject: true,
+      inject: "body",
       template: "./src/views/roomInfo.html",
       filename: "views/roomInfo.html",
       chunks: ["roomInfo"],
