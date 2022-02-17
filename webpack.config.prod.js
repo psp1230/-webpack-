@@ -21,6 +21,13 @@ module.exports = {
       filename: "index.html",
       // chunks: [],
     }),
+    new HtmlWebpackPlugin({
+      title: "測試分頁",
+      inject: true,
+      template: "./src/views/roomInfo.html",
+      filename: "views/roomInfo.html",
+      // chunks: [],
+    }),
   ],
   module: {
     rules: [
@@ -44,6 +51,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-transform-runtime"],
           },
         },
       },
