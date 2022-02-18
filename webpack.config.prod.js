@@ -12,6 +12,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "js/[name]-[contenthash:8].bundle.js",
+    assetModuleFilename: "assets/[name][ext]",
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -41,7 +42,12 @@ module.exports = {
       {
         test: /\.(css|scss|sass)$/i,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../",
+            },
+          },
           // [css-loader](/loaders/css-loader)
           {
             loader: "css-loader",
@@ -66,15 +72,8 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-            },
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg)$/,
+        type: "asset/resource",
       },
     ],
   },
