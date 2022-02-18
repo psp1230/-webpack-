@@ -46,9 +46,9 @@ module.exports = {
           // [css-loader](/loaders/css-loader)
           {
             loader: "css-loader",
-            options: {
-              modules: { localIdentName: '[name]-[local]-[hash:base64:5]' },
-            },
+            // options: {
+            //   modules: { localIdentName: '[name]-[local]-[hash:base64:5]' },
+            // },
           },
           // {
           //   loader: "sass-loader",
