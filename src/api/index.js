@@ -29,6 +29,6 @@ export function bookRoom(id, data) {
 export function cancelAllBooking() {
   return request({
     method: "DELETE",
-    url: "/thef2e2019/stage6/room",
+    url: "/thef2e2019/stage6/rooms",
   });
 }
