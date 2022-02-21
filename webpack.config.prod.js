@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -24,6 +25,7 @@ module.exports = {
       filename: "css/[name].[hash].css",
     }),
     new CopyPlugin({ patterns: [{ from: "./src/assets", to: "./assets" }] }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "測試",
       inject: "body",
