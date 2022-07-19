@@ -1,15 +1,29 @@
 const path = require("path");
+const fs = require("fs")
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
+const jsFiles = './src/js'
+const jsEntry = fs.readdirSync(jsFiles).reduce((accumulator, file) => {
+  const fileName = file.replace('.js', '')
+  accumulator[fileName] = `${jsFiles}/${fileName}`
+  return accumulator
+}, {})
+
+const htmlFiles = './src/views'
+const htmlConfig = fs.readdirSync(htmlFiles).map(file => new HtmlWebpackPlugin({
+  title: "hotelbooking",
+  inject: "body",
+  template: `${htmlFiles}/${file}`,
+  filename: `${file}`,
+  chunks: [`${file.replace('.html', '')}`],
+}));
+
 module.exports = {
   mode: "development",
-  entry: {
-    index: "./src/js/index",
-    roomInfo: "./src/js/roomInfo",
-  },
+  entry: jsEntry,
   output: {
     path: path.join(__dirname, "dist"),
     filename: "js/[name]-[contenthash:8].bundle.js",
@@ -26,19 +40,13 @@ module.exports = {
     }),
     new CopyPlugin({ patterns: [{ from: "./src/assets", to: "./assets" }] }),
     new HtmlWebpackPlugin({
-      title: "測試",
+      title: "hotelbooking",
       inject: "body",
       template: "./src/index.html",
       filename: "index.html",
       chunks: ["index"],
     }),
-    new HtmlWebpackPlugin({
-      title: "測試分頁",
-      inject: "body",
-      template: "./src/views/roomInfo.html",
-      filename: "views/roomInfo.html",
-      chunks: ["roomInfo"],
-    }),
+    ...htmlConfig
   ],
   module: {
     rules: [

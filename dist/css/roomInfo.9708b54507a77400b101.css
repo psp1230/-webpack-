@@ -1,0 +1,15 @@
+.test {
+  margin: 10px;
+  background-color: aquamarine;
+  width: 200px;
+  height: 200px;
+}
+
+.test-2 {
+  margin: 10px;
+  background: url(../assets/try.jpg);
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+}
+

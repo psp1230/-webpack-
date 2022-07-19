@@ -3,6 +3,7 @@ import "../css/main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "bootstrap";
 import { getAllRoomInfo } from "../api/index";
+import { getAllRoomInfoTest } from "../exapi/index"
 
 const hello = "Hello World";
 $("#app").append(`<div class="test">${hello}</div>`);
@@ -20,3 +21,10 @@ async function getRoomData() {
 }
 
 getRoomData();
+
+async function testData() {
+  const data = await getAllRoomInfoTest()
+  console.log(data)
+}
+
+testData()

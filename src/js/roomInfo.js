@@ -1,4 +1,4 @@
 import "jquery";
 import "../css/main.css";
 
-console.log("4354")
+console.log("4354");
